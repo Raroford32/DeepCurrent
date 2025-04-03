@@ -308,7 +308,7 @@ def check_and_regenerate_diagrams(contract_base, output_dir):
     # Check Call Diagram
     cd_file = os.path.join(output_dir, f"{contract_base}_call_diagram.md")
     try:
-        with open(cd_file, "r", encoding="utf-8") as f:
+        with open(cd_file, "r", encoding="utf-8") as f):
             cd_content = f.read().strip()
     except Exception as e:
         console.print(f"Error reading {cd_file}: {e}")
@@ -426,6 +426,8 @@ def process_contract(filepath, output_dir):
     console.print("Detailed analysis outputs created and saved.")
     # Save analysis to SQLite DB
     save_analysis(contract_id, os.path.basename(filepath), content, functions_report, journey_report, journey_diagram, call_diagram)
+    # Integrate brain_like_system for decision-making and attack mapping
+    brain_like_system(content)
 
 # -------------------------------
 # New Function: Detect Exploitable Vulnerabilities
@@ -441,6 +443,8 @@ def detect_exploitable_vulnerabilities(contract_content):
     output = call_llm(prompt, model=ANALYSIS_MODEL)
     console.print("Exploitable vulnerabilities detected:")
     console.print(output)
+    # Utilize brain_like_system for improved vulnerability detection
+    brain_like_system(contract_content)
     return output if output else "[No exploitable vulnerabilities detected]"
 
 # -------------------------------
@@ -458,6 +462,22 @@ def modularize_for_attacker_mindset(contract_content):
     console.print("Code modularized for attacker mindset:")
     console.print(output)
     return output if output else "[No modularization produced]"
+
+# -------------------------------
+# New Function: Brain-like System for Decision-Making and Attack Mapping
+# -------------------------------
+def brain_like_system(contract_content):
+    prompt = (
+        "Simulate a brain-like decision-making system for the following smart contract code.\n"
+        "Make decisions about attack steps and map out a potential attack strategy.\n"
+        "Return the detailed decision-making process and attack map as plain text.\n\n"
+        "Smart Contract Code:\n---------------------\n" + contract_content + "\n---------------------\n"
+    )
+    console.print("Simulating brain-like system for decision-making and attack mapping...")
+    output = call_llm(prompt, model=ANALYSIS_MODEL)
+    console.print("Brain-like system simulation completed:")
+    console.print(output)
+    return output if output else "[No brain-like system simulation produced]"
 
 # -------------------------------
 # Main Application Flow
