@@ -32,7 +32,7 @@ console = Console()
 # -------------------------------
 # Global Configurations
 # -------------------------------
-LLM_API_URL = "http://localhost:11434/v1/completions"
+LLM_API_URL = "https://api.openrouter.ai/v1/completions"
 MAX_TOKENS = 3000
 MODEL_NAME = "deepseek-r1"  # Default; can be changed at startup
 ANALYSIS_MODEL = None
@@ -426,6 +426,38 @@ def process_contract(filepath, output_dir):
     console.print("Detailed analysis outputs created and saved.")
     # Save analysis to SQLite DB
     save_analysis(contract_id, os.path.basename(filepath), content, functions_report, journey_report, journey_diagram, call_diagram)
+
+# -------------------------------
+# New Function: Detect Exploitable Vulnerabilities
+# -------------------------------
+def detect_exploitable_vulnerabilities(contract_content):
+    prompt = (
+        "Simulate an attacker's mindset and detect any exploitable vulnerabilities in the following smart contract code.\n"
+        "Include novel and advanced attack strategies that could potentially exploit the contract.\n"
+        "Return the detailed analysis as plain text.\n\n"
+        "Smart Contract Code:\n---------------------\n" + contract_content + "\n---------------------\n"
+    )
+    console.print("Detecting exploitable vulnerabilities...")
+    output = call_llm(prompt, model=ANALYSIS_MODEL)
+    console.print("Exploitable vulnerabilities detected:")
+    console.print(output)
+    return output if output else "[No exploitable vulnerabilities detected]"
+
+# -------------------------------
+# New Function: Modularize for Attacker Mindset
+# -------------------------------
+def modularize_for_attacker_mindset(contract_content):
+    prompt = (
+        "Modularize the following smart contract code to reflect an attacker's mindset.\n"
+        "Create specific modules or functions that simulate novel attacker strategies and potential exploits.\n"
+        "Return the modularized code as plain text.\n\n"
+        "Smart Contract Code:\n---------------------\n" + contract_content + "\n---------------------\n"
+    )
+    console.print("Modularizing code for attacker mindset...")
+    output = call_llm(prompt, model=ANALYSIS_MODEL)
+    console.print("Code modularized for attacker mindset:")
+    console.print(output)
+    return output if output else "[No modularization produced]"
 
 # -------------------------------
 # Main Application Flow
