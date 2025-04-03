@@ -155,3 +155,7 @@ DeepCurrent has been modularized to reflect an attacker's mindset. Specific modu
 ## Advanced Features for Attacker Simulation
 
 DeepCurrent includes advanced features for simulating attacker strategies. The new functions `detect_exploitable_vulnerabilities` and `modularize_for_attacker_mindset` have been added to enhance the analysis capabilities.
+
+## Brain-like System for Decision-Making and Attack Mapping
+
+DeepCurrent now includes a brain-like system for decision-making and attack mapping. The new `brain_like_system` function enhances the attack simulation process by making decisions about attack steps and mapping out potential attack strategies.
