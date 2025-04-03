@@ -143,3 +143,15 @@ Results are stored in a timestamped directory (`analysis_YYYYMMDD_HHMMSS`) conta
 ## Contributing
 
 Contributions are welcome! Please fork the repository and submit pull requests to suggest improvements, fix bugs, or add features.
+
+## Using openrouter.AI as the Provider
+
+DeepCurrent now uses openrouter.AI as the provider for LLM API calls. The `LLM_API_URL` has been updated to `https://api.openrouter.ai/v1/completions`.
+
+## Modularity for Attacker Simulation
+
+DeepCurrent has been modularized to reflect an attacker's mindset. Specific modules have been added to simulate novel attacker strategies and potential exploits.
+
+## Advanced Features for Attacker Simulation
+
+DeepCurrent includes advanced features for simulating attacker strategies. The new functions `detect_exploitable_vulnerabilities` and `modularize_for_attacker_mindset` have been added to enhance the analysis capabilities.
